@@ -75,6 +75,8 @@ if [ $(id -u) == 0 ] ; then
         echo "Add $NB_USER to group: $NB_GID"
         groupadd -g $NB_GID -o $NB_USER
         usermod -a -G $NB_GID $NB_USER
+	# Restore access to the "users" group after above.
+	adduser $NB_USER users
     fi
 
     # Enable sudo if requested
