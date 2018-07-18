@@ -55,6 +55,9 @@ if [ $(id -u) == 0 ] ; then
         if [[ ! -e "/home/$NB_USER" ]]; then
             echo "Relocating home dir to /home/$NB_USER"
             mv /home/jovyan "/home/$NB_USER"
+	    # Allow "docker exec" to run, because old home is hardcoded
+	    mkdir /home/jovyan
+	    chmod /home/jovyan --reference="/home/$NB_USER"
         fi
         # if workdir is in /home/jovyan, cd to /home/$NB_USER
         if [[ "$PWD/" == "/home/jovyan/"* ]]; then
